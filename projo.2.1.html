@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+    <input placeholder="todoname" class="mico">
+    <input type="date">
+    <button onclick="
+    addTodo();
+    ">add</button>
+    <div class="maggie"></div>
+    
+    <script>
+    const todoList = [{
+        name:'wash dishes',
+        dueDate:'2026-12-22'}];
+    
+    rendertodoList()
+
+    function rendertodoList(){
+    let todolistHTML =''
+    for (let i = 0; i < todoList.length; i++) {
+        const todoObject= todoList[i];
+        const name = todoObject.name;
+        const dueDate = todoObject.dueDate;
+
+        const html = `
+        <p>
+         ${name} ${dueDate}
+            <button onclick="
+            todoList.splice(${i},1);
+            rendertodoList();
+            ">delete</button></P>`;
+        todolistHTML+=html
+    }
+    console.log(todolistHTML);
+    document.querySelector('.maggie').innerHTML = todolistHTML}
+    function addTodo(){
+        const nameinput = document.querySelector('.mico')
+        const dateinput = document.querySelector('input[type="date"]')
+        const inputElement = document.querySelector('.mico')
+        const name = nameinput.value;
+        const dueDate = dateinput.value;
+        console.log(name);
+        todoList.push({name,dueDate});
+        inputElement.value=''
+        rendertodoList();
+        }
+    </script>
+    </body>
+</html>
